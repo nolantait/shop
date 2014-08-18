@@ -18,3 +18,11 @@
 
 $include-html-orbit-classes: $include-html-classes;
 
+.header {
+  padding-bottom: 40px;
+}
+
+.orbit img {
+      width: 100%;
+      overflow: hidden;
+}

@@ -15,6 +15,7 @@ ActiveAdmin.register Product do
   # end
   #
 
+  permit_params :category, :title, :slideshow, :price, :photo
 
   form do |f|
     f.inputs 'Products' do
@@ -22,9 +23,7 @@ ActiveAdmin.register Product do
       f.input :title
       f.input :slideshow
       f.input :price
-    end
-
-    f.has_one :product_image do |p|
+      f.input :photo, required: false
 
 
     end
