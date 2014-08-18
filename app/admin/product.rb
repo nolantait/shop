@@ -1,5 +1,6 @@
 ActiveAdmin.register Product do
 
+  permit_params :title, :price, :slideshow, :photo, :category => :name
 
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -13,23 +14,29 @@ ActiveAdmin.register Product do
   #  permitted << :other if resource.something?
   #  permitted
   # end
-  #
-
-  permit_params :category, :title, :slideshow, :price, :photo
 
   form do |f|
-    f.inputs 'Products' do
-      f.input :category
+    f.inputs "Product Details" do
       f.input :title
-      f.input :slideshow
+      f.belongs_to :category do |p|
+        p.inputs
+      end
       f.input :price
-      f.input :photo, required: false
-
-
+      f.input :slideshow
+      f.input :photo, :required => false, :as => :file
     end
-
     f.actions
   end
 
-end
+  show do |ad|
+    attributes_table do
+      row :title
+      row :category
+      row :photo do
+        image_tag(ad.photo.url(:medium))
+      end
 
+    end
+  end
+
+end
